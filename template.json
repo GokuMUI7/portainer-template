@@ -437,5 +437,6 @@
 					"container": "/var/lib/mysql"
 				}
 			]
-		},
-	}
+		}
+	]
+}
