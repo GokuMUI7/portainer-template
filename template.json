@@ -1,0 +1,442 @@
+{
+	"version": "2",
+	"templates": [
+		{
+			"categories": [
+				"Other",
+				"Tools"
+			],
+			"description": "AdGuard Home is a network-wide software for blocking ads & tracking.",
+			"image": "adguard/adguardhome:latest",
+			"logo": "https://developer.asustor.com/uploadIcons/0020_999_1595573028_AdGuardhome_256.png",
+			"name": "Adguardhome",
+			"platform": "linux",
+			"ports": [
+				"53:53/tcp",
+				"53:53/udp",
+				"67:67/udp",
+				"80:80/tcp",
+				"443:443/tcp",
+				"443:443/udp",
+				"3001:3000/tcp",
+				"853:853/tcp",
+				"784:784/udp",
+				"853:853/udp",
+				"8853:8853/udp",
+				"5443:5443/tcp",
+				"5443:5443/udp"
+			],
+			"restart_policy": "unless-stopped",
+			"title": "Adguardhome",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/portainer/Files/AppData/Config/AdguardHome/config",
+					"container": "/opt/adguardhome/conf"
+				},
+				{
+					"bind": "/portainer/Files/AppData/Config/AdguardHome/work",
+					"container": "/opt/adguardhome/work"
+				}
+			],
+			"note": "<br><br><b>Official Webpage: </b><a href=\"https://adguard.com/en/adguard-home/overview.html\" target=\"_blank\">https://adguard.com/en/adguard-home/overview.html</a><br><b>Official Docker Documentation: </b><a href=\"https://github.com/AdguardTeam/AdGuardHome/wiki/Docker\" target=\"_blank\">https://github.com/AdguardTeam/AdGuardHome/wiki/Docker</a><br><br><br>"
+		},
+		{
+			"categories": [
+				"Video",
+				"Music",
+				"Photos"
+			],
+			"description": "Jellyfin is a Free Software Media System that puts you in control of managing and streaming your media. It is an alternative to the proprietary Emby and Plex, to provide media from a dedicated server to end-user devices via multiple apps.",
+			"env": [
+				{
+					"default": "1000",
+					"label": "PUID",
+					"name": "PUID"
+				},
+				{
+					"default": "1000",
+					"label": "PGID",
+					"name": "PGID"
+				},
+				{
+					"default": "America/New_York",
+					"label": "TZ",
+					"name": "TZ"
+				}
+			],
+			"image": "linuxserver/jellyfin:latest",
+			"logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/jellyfin.png",
+			"name": "jellyfin",
+			"platform": "linux",
+			"ports": [
+				"8096:8096/tcp",
+				"8920:8920/tcp"
+			],
+			"restart_policy": "unless-stopped",
+			"title": "Jellyfin",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/portainer/Files/AppData/Config/Jellyfin",
+					"container": "/config"
+				},
+				{
+					"bind": "/portainer/TV",
+					"container": "/data/tvshows"
+				},
+				{
+					"bind": "/portainer/Movies",
+					"container": "/data/movies"
+				}
+			],
+			"note": "<br><br><b>Official Webpage: </b><a href=\"https://jellyfin.org/\" target=\"_blank\">https://jellyfin.org/</a><br><b>Official Docker Documentation: </b><a href=\"https://docs.linuxserver.io/images/docker-jellyfin\" target=\"_blank\">https://docs.linuxserver.io/images/docker-jellyfin</a><br><br><br>"
+		},
+		{
+			"categories": [
+				"Other",
+				"Tools"
+			],
+			"description": "A Linux network-level advertisement and Internet tracker blocking application which acts as a DNS sinkhole.",
+			"image": "pihole/pihole:latest",
+			"logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/pihole.png",
+			"name": "pihole",
+			"note": "<br><b>Official Webpage: </b><a href=\"https://pi-hole.net/\" target=\"_blank\">https://pi-hole.net/</a><br><b>Official Docker Documentation: </b><a href=\"https://github.com/pi-hole/docker-pi-hole/#running-pi-hole-docker\" target=\"_blank\">https://github.com/pi-hole/docker-pi-hole/#running-pi-hole-docker</a><br><h3><b>Pi-Hosted dedicated documentation: </b><a href=\"https://github.com/pi-hosted/pi-hosted/blob/master/docs/pi-hole.md\" target=\"_blank\">pi-hole.md</a></h3><br><br><br>When the installation is complete, navigate to your.ip.goes.here:1010/admin. Follow the article <a href='https://medium.com/@niktrix/getting-rid-of-systemd-resolved-consuming-port-53-605f0234f32f'>here</a> if you run into issues binding to port 53. If you like to use Pi-Hole's built in DHCP-Server change the Network type to host and open advance options and scroll to Labels and add: NET_ADMIN with the value True. When you do so, specify a port is no more needed, navigate to your.ip.goes.here/admin.",
+			"platform": "linux",
+			"ports": [
+				"53:53/tcp",
+				"53:53/udp",
+				"67:67/udp",
+				"1010:80/tcp",
+				"4443:443/tcp"
+			],
+			"restart_policy": "unless-stopped",
+			"title": "Pi-Hole",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/portainer/Files/AppData/Config/PiHole",
+					"container": "/etc/pihole"
+				},
+				{
+					"bind": "/portainer/Files/AppData/Config/PiHole/DNS",
+					"container": "/etc/dnsmasq.d"
+				}
+			]
+		},
+		{
+			"description": "Bazarr is a companion application to Sonarr and Radarr. It can manage and download subtitles based on your requirements. You define your preferences by TV show or movie and Bazarr takes care of everything for you.",
+			"env": [
+				{
+					"default": "1000",
+					"label": "PUID",
+					"name": "PUID"
+				},
+				{
+					"default": "1000",
+					"label": "PGID",
+					"name": "PGID"
+				},
+				{
+					"default": "America/New_York",
+					"label": "TZ",
+					"name": "TZ"
+				}
+			],
+			"image": "linuxserver/bazarr:latest",
+			"logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/bazarr.png",
+			"name": "bazarr",
+			"platform": "linux",
+			"ports": [
+				"6767:6767/tcp"
+			],
+			"restart_policy": "unless-stopped",
+			"title": "Bazarr",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/portainer/Files/AppData/Config/Bazarr",
+					"container": "/config"
+				},
+				{
+					"bind": "/portainer/TV",
+					"container": "/tv"
+				},
+				{
+					"bind": "/portainer/Movies",
+					"container": "/movies"
+				}
+			],
+			"note": "<br><br><b>Official Webpage: </b><a href=\"https://www.bazarr.media/\" target=\"_blank\">https://www.bazarr.media/</a><br><b>Official Docker Documentation: </b><a href=\"https://wiki.bazarr.media/Getting-Started/Installation/Docker/docker/\" target=\"_blank\">https://wiki.bazarr.media/Getting-Started/Installation/Docker/docker/</a><br><br><br>"
+		},
+		{
+			"description": "Jackett works as a proxy server it translates queries from apps like Sonarr etc into tracker-site-specific http queries and parses the html response sending results back to the requesting software.",
+			"env": [
+				{
+					"default": "1000",
+					"label": "PUID",
+					"name": "PUID"
+				},
+				{
+					"default": "1000",
+					"label": "PGID",
+					"name": "PGID"
+				}
+			],
+			"image": "linuxserver/jackett:latest",
+			"logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/jacket-icon.png",
+			"name": "jackett",
+			"platform": "linux",
+			"ports": [
+				"9117:9117/tcp"
+			],
+			"restart_policy": "unless-stopped",
+			"title": "Jackett",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/portainer/Files/AppData/Config/Jackett",
+					"container": "/config"
+				},
+				{
+					"bind": "/portainer/Downloads",
+					"container": "/downloads"
+				}
+			]
+        },
+		{
+			"categories": [
+				"Downloaders",
+				"Video"
+			],
+			"description": "Radarr - A fork of Sonarr to work with movies à la Couchpotato.",
+			"env": [
+				{
+					"default": "1000",
+					"label": "PUID",
+					"name": "PUID"
+				},
+				{
+					"default": "1000",
+					"label": "PGID",
+					"name": "PGID"
+				}
+			],
+			"image": "linuxserver/radarr:latest",
+			"logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/radarr.png",
+			"name": "radarr",
+			"platform": "linux",
+			"ports": [
+				"7878:7878/tcp"
+			],
+			"restart_policy": "unless-stopped",
+			"title": "Radarr",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/portainer/Files/AppData/Config/Radarr",
+					"container": "/config"
+				},
+				{
+					"bind": "/portainer/Downloads",
+					"container": "/downloads"
+				},
+				{
+					"bind": "/portainer/Movies",
+					"container": "/movies"
+				}
+			],
+		},
+		{
+			"description": "Sonarr (formerly NZBdrone) is a PVR for usenet and bittorrent users. It can monitor multiple RSS feeds for new episodes of your favorite shows and will grab, sort and rename them. It can also be configured to automatically upgrade the quality of files already downloaded when a better quality format becomes available.",
+			"env": [
+				{
+					"default": "1000",
+					"label": "PUID",
+					"name": "PUID"
+				},
+				{
+					"default": "1000",
+					"label": "PGID",
+					"name": "PGID"
+				}
+			],
+			"image": "linuxserver/sonarr:latest",
+			"logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/sonarr-icon.png",
+			"name": "sonarr",
+			"platform": "linux",
+			"ports": [
+				"8989:8989/tcp"
+			],
+			"restart_policy": "unless-stopped",
+			"title": "Sonarr",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/portainer/Files/AppData/Config/Sonarr",
+					"container": "/config"
+				},
+				{
+					"bind": "/dev/rtc",
+					"container": "/dev/rtc"
+				},
+				{
+					"bind": "/portainer/TV",
+					"container": "/tv"
+				},
+				{
+					"bind": "/portainer/Downloads",
+					"container": "/downloads"
+				}
+			],
+			"note": "<br><br><b>Official Webpage: </b><a href=\"https://sonarr.tv/\" target=\"_blank\">https://sonarr.tv/</a><br><b>Official Docker Documentation: </b><a href=\"https://docs.linuxserver.io/images/docker-sonarr\" target=\"_blank\">https://docs.linuxserver.io/images/docker-sonarr</a><br><br><br>"
+		},
+		{
+			"categories": [
+				"Tools",
+				"Web",
+				"Other"
+			],
+			"description": "Run a Speedtest every hour and graph the results.  See https://hub.docker.com/r/henrywhitaker3/speedtest-tracker/tags for arch options",
+			"env": [
+				{
+					"default": "true",
+					"label": "OOKLA_EULA_GDPR",
+					"name": "OOKLA_EULA_GDPR"
+				}
+			],
+			"image": "henrywhitaker3/speedtest-tracker:dev-arm",
+			"logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/speedtest-tracker.png",
+			"name": "speedtest-tracker",
+			"platform": "linux",
+			"ports": [
+				"8765:80/tcp"
+			],
+			"restart_policy": "unless-stopped",
+			"title": "Speedtest Tracker",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/portainer/Files/AppData/Config/speedtest-tracker",
+					"container": "/config"
+				}
+			],
+			"note": "<br><br><b>Official Webpage: </b><a href=\"https://github.com/henrywhitaker3/Speedtest-Tracker\" target=\"_blank\">https://github.com/henrywhitaker3/Speedtest-Tracker</a><br><b>Official Docker Documentation: </b><a href=\"https://github.com/henrywhitaker3/Speedtest-Tracker#using-docker\" target=\"_blank\">https://github.com/henrywhitaker3/Speedtest-Tracker#using-docker</a><br><br><br>"
+		},
+		{
+			"description": "This docker image provides a Minecraft Server that will automatically download the latest stable version at startup. You can also run/upgrade to any specific version or the latest snapshot. See the Versions section below for more information.",
+			"env": [
+				{
+					"default": "TRUE",
+					"label": "EULA",
+					"name": "EULA"
+				}
+			],
+			"image": "itzg/minecraft-server:latest",
+			"logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/minecraft.png",
+			"name": "minecraft",
+			"platform": "linux",
+			"ports": [
+				"25565:25565/tcp"
+			],
+			"restart_policy": "unless-stopped",
+			"title": "Minecraft Server",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/portainer/Files/AppData/Config/Minecraft-data",
+					"container": "/data"
+				}
+			],
+			"note": "<br><br><b>Official Webpage: </b><a href=\"https://www.minecraft.net/en-us\" target=\"_blank\">https://www.minecraft.net/en-us</a><br><b>Official Docker Documentation: </b><a href=\"https://github.com/itzg/docker-minecraft-server#using-docker-compose\" target=\"_blank\">https://github.com/itzg/docker-minecraft-server#using-docker-compose</a><br><br><br>"
+		},
+		{
+		
+			"description": "PGAdmin is a web-based GUI tool used to interact with the Postgres database sessions, both locally and remote servers as well. You can use PGAdmin to perform any sort of database administration required for a Postgres database.",
+			"env": [
+				{
+					"default": "1000",
+					"label": "PUID",
+					"name": "PUID"
+				},
+				{
+					"default": "1000",
+					"label": "PGID",
+					"name": "PGID"
+				},
+				{
+					"default": "",
+					"label": "PGADMIN_DEFAULT_EMAIL",
+					"name": "PGADMIN_DEFAULT_EMAIL"
+				},
+				{
+					"default": "",
+					"label": "PGADMIN_DEFAULT_PASSWORD",
+					"name": "PGADMIN_DEFAULT_PASSWORD"
+				},
+				{
+					"default": "America/New_York",
+					"label": "TZ",
+					"name": "TZ"
+				}
+			],
+			"image": "dpage/pgadmin4:latest",
+			"logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/pgadmin.png",
+			"name": "pgadmin",
+			"platform": "linux",
+			"ports": [
+				"5050:80/tcp"
+			],
+			"restart_policy": "unless-stopped",
+			"title": "pgAdmin",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/portainer/Files/AppData/Config/pgadmin",
+					"container": "/var/lib/pgadmin"
+				}
+				]
+		},
+		{
+			"description": "MySQL is an open-source relational database management system (RDBMS). It is the most widely used relational database management system (RDBMS) by both large and small businesses. It is the most widely used RDBMS by both large and small businesses.",
+			"env": [
+				{
+					"default": "1000",
+					"label": "PUID",
+					"name": "PUID"
+				},
+				{
+					"default": "1000",
+					"label": "PGID",
+					"name": "PGID"
+				},
+				{
+					"default": "rootpassword",
+					"label": "MYSQL_ROOT_PASSWORD",
+					"name": "MYSQL_ROOT_PASSWORD"
+				},
+				{
+					"default": "America/New_York",
+					"label": "TZ",
+					"name": "TZ"
+				}
+			],
+			"image": "mysql:latest",
+			"logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/mysql.png",
+			"name": "mysql",
+			"platform": "linux",
+			"ports": [
+				"3306:3306/tcp"
+			],
+			"restart_policy": "unless-stopped",
+			"title": "MySQL",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/portainer/Files/AppData/Config/MySQL",
+					"container": "/var/lib/mysql"
+				}
+			],
+		}
+	}
+}
