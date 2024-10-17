@@ -436,7 +436,7 @@
 					"bind": "/portainer/Files/AppData/Config/MySQL",
 					"container": "/var/lib/mysql"
 				}
-			],
+			]
 		}
 	}
 }
